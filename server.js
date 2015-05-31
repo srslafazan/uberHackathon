@@ -9,6 +9,27 @@ var bodyParser = require('body-parser');
 var app = express();
 var config = require('./config.js');
 // Get all auth stuff from config file
+
+// DB
+var mongoose  = require('mongoose'),
+  Schema    = mongoose.Schema;
+
+// SCHEMA
+  var businessSchema = new mongoose.Schema({
+    // PROPERTIES
+      name: { type: String },
+      productCategory: { type: String },
+      smbLicense: { type: String },
+    // IMPORTED DOCUMENTS
+
+    //EXPORTED DOCUMENTS
+  });
+
+  mongoose.model('Business', businessSchema);
+  var Business = mongoose.model('Business');
+
+  
+
 // ClientID & ClientSecret for API requests with OAUTH
 var clientID = config.ClientID;
 var clientSecret = config.ClientSecret;
@@ -27,17 +48,21 @@ app.use(passport.session());
 app.use(express.static(__dirname + '/client'));
 app.set('views', __dirname + '/client/views');
 app.set('view engine','ejs');
+
 // bodyparser for handling post data
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // post to show unauthorized request
-app.post('/cars', function(request, response) {
+app.post('/cars', function (request, response) {
   getRequest('/v1/products?latitude='+request.body.start_latitude+'&longitude='+request.body.start_longitude, function(err, res) {
     response.json(res);
-  })
-})
+  });
+});
 
+app.post('/register', function (req, res){
+  console.log(req.body);
+});
 
 // use this for an api get request without oauth
 function getRequest(endpoint, callback) {
@@ -49,7 +74,8 @@ function getRequest(endpoint, callback) {
       Authorization: "Token " + ServerID
     }
   }
-  var req = https.request(options, function(res) {
+
+  var req = https.request(options, function (res) {
     res.on('data', function(data) {
       console.log('data!');
       console.log(JSON.parse(data));
@@ -111,6 +137,98 @@ app.get('/', ensureAuthenticated, function (request, response) {
 	response.render('index');
 });
 
+
+app.get('/user', ensureAuthenticated, function (request, response){
+  var userProfile,
+      userHistory;
+
+  getAuthorizedRequest('/v1/me', request.user.accessToken, function (error, res) {
+    if (error) { 
+      console.log(error); 
+      } else {
+        userProfile = res;
+        }
+  });
+
+  getAuthorizedRequest('/v1.2/history', request.user.accessToken, function (error, res) {
+    if (error) { 
+      console.log("err", error); 
+      } else {
+      userHistory = res;
+      }
+  });
+  
+  var userInfo = {};
+  
+  if ( userProfile ) {
+    userInfo['userProfile'] = userProfile;
+  } else { // load default profile for demo
+    userInfo['userProfile'] = {
+      "picture":"https://d1w2poirtb3as9.cloudfront.net/default.jpeg",
+      "first_name":"Shain",
+      "last_name":"Lafazan",
+      "promo_code":"shainl1ue",
+      "email":"srslafazan@gmail.com",
+      "uuid":"30e3e5f1-63f2-414c-8532-9efd1ef15a5f"
+    };
+  }
+  if ( userHistory ) {
+    userInfo['userHistory'] = userHistory;
+  } else { // load default profile for demo
+      userInfo['userHistory'] = {
+        "offset": 0,
+        "limit": 1,
+        "count": 4,
+        "history": [
+        {
+          "status":"completed",
+          "distance":1.64691465,
+          "request_time":1428876188,
+          "start_time":1428876374,
+          "start_city":{
+            "latitude":37.7749295,
+            "display_name":"San Francisco",
+            "longitude":-122.4194155
+          },
+       "end_time":1428876927,
+       "request_id":"37d57a99-2647-4114-9dd2-c43bccf4c30b",
+       "currency_code":"USD",
+       "product_id":"a1111c8c-c720-46c3-8534-2fcdd730040d"
+        },
+        {
+          "product_id":"821415d8-3bd5-4e27-9604-194e4359a449" // example businesses helped for demo
+        },
+        {
+          "product_id":"23a231fd-9fa8-45a7-b212-e3f9cb69873f" // example businesses helped for demo
+        },
+        {
+          "product_id":"c9b74e41-816c-4df8-8290-41fc1df9476c" // example businesses helped for demo
+        },
+      ]
+    };
+  }
+  var businessesHelped = [];
+  var transactionHistory = userInfo.userHistory.history;
+  for ( var i = 0; i < transactionHistory.length; i++ ){
+    businessesHelped.push({});
+    switch(transactionHistory[i].product_id){
+      case "a1111c8c-c720-46c3-8534-2fcdd730040d": businessesHelped[i].name = "Ripley's Leaf it or Not";
+      break;
+      case "821415d8-3bd5-4e27-9604-194e4359a449": businessesHelped[i].name = "Edward's Hair Stylers";
+      break;
+      case "23a231fd-9fa8-45a7-b212-e3f9cb69873f": businessesHelped[i].name = "Caesar's Plumbers";
+      break;
+      case "c9b74e41-816c-4df8-8290-41fc1df9476c": businessesHelped[i].name = "Titanium Locksmiths";
+      break;
+      default: businessesHelped[i].name = "Joe's Taco Shack";
+      break;
+    }
+  }
+  userInfo['businessesHelped'] = businessesHelped;
+  console.log(userInfo);  
+  response.render('user', userInfo);
+});
+
 // /profile API endpoint
 app.get('/profile', ensureAuthenticated, function (request, response) {
 	getAuthorizedRequest('/v1/me', request.user.accessToken, function (error, res) {
@@ -131,17 +249,23 @@ app.get('/history', ensureAuthenticated, function (request, response) {
 // ride request API endpoint
 app.post('/request', ensureAuthenticated, function (request, response) {
 	// NOTE! Keep in mind that, although this link is a GET request, the actual ride request must be a POST, as shown below
-	var parameters = {
+	console.log('in the request');
+  console.log(request.body);
+  var businessName = request.body.businessName;
+  console.log('\n\n the business Name is: ' + businessName + '\n\n');
+
+  var parameters = {
 		start_latitude : request.body.start_latitude,
 		start_longitude: request.body.start_longitude,
-		end_latitude: request.body.end_latitude,
-		end_longitude: request.body.end_longitude,
-		product_id: "a1111c8c-c720-46c3-8534-2fcdd730040d"
+		end_latitude: request.body.end_latitude + 1,
+		end_longitude: request.body.end_longitude + 1,
+		product_id: request.body.currentService,
 	};
 
 	postAuthorizedRequest('/v1/requests', request.user.accessToken, parameters, function (error, res) {
 		if (error) { console.log(error); }
-		response.json(res);
+    console.log(res);
+    response.render('success', { 'businessName':businessName, 'eta':res.eta });
 	});
 });
 
@@ -171,8 +295,8 @@ function getAuthorizedRequest(endpoint, accessToken, callback) {
   }
   var req = https.request(options, function(res) {
     res.on('data', function(data) {
-      console.log('data!');
-      console.log(JSON.parse(data));
+
+      // console.log(JSON.parse(data));
       callback(null, JSON.parse(data));
     })
   })

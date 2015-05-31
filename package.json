@@ -1,5 +1,5 @@
 {
-  "name": "Uber API Node",
+  "name": "uberapinode",
   "version": "0.0.1",
   "description": "Starter Kit for using the Uber API with Node.js and Express.js",
   "author": "Ketul 'Jay' Patel",
@@ -9,7 +9,9 @@
     "ejs": "^2.3.1",
     "express": "^4.12.4",
     "express-session": "^1.11.2",
+    "mongoose": "^4.0.4",
     "passport": "^0.2.2",
-    "passport-uber": "0.0.1"
+    "passport-uber": "0.0.1",
+    "uber-api": "^0.3.3"
   }
 }

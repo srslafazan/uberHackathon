@@ -1,0 +1,25 @@
+<html lang='en'>
+<head>
+	<title>User</title>
+	<meta charset='UTF-8'>
+</head>
+<body>
+	<div class='container'>
+
+			<h3><%= userProfile.first_name %> <%= userProfile.last_name %>'s Local Influence Profile</h3>
+
+			<div>
+			<h2><%= userHistory.count %> Businesses helped</h2>
+
+				<ul>
+				<% for ( var i in businessesHelped ){ %>
+					<li><%= businessesHelped[i].name %></li>
+				<% } %>
+				</ul>
+
+				<a href='/'>Back to Home</a>
+
+			</div>
+	</div>
+</body>
+</html>

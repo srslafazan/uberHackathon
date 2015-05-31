@@ -2,50 +2,424 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Uber App</title>
+	<title>NeighUBERly</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDNO6mBsSn03jTgWSwHulQT6X1YO0UMSeY&amp&sensor=false&callback=initializeMap&libraries=places"></script>
+    <script src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/main.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/common.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/util.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/marker.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/map.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/onion.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/geocoder.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/controls.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/stats.js"></script>
 </head>
 <body>
-	<h2>Uber App</h2>
-	<h4>You are now authenticated within Uber.</h4>
-	<h4>Sample Endpoints:</h4>
-	<p><a href="/profile">Profile</a></p>
-	<p><a href="/history">History</a></p>
-	<div id="location">
-		<p>Loading geolocation...</p>
-	</div>
-	<p><a href="/logout">Logout</a></p>
 
-	<script type="text/javascript">
+  <p id="location">Hang Tight! Getting Current Location...<p>
+  <div id='categories'></div>
 
-	var locationDiv = document.getElementById("location");
+  <div id='availableBusinesses'></div>
 
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition);
-	} else {
+  <div id="googleMap" style="width:500px;height:380px;"></div>
+
+  <p id='requestButton'></p>
+
+  <script>
+    var latitude = 37;
+    var longitude = 122;
+
+    $(document).ready(function() {
+      var locationPar = document.getElementById("location");
+      var ServerID = "KUHT_dj74fNfYWj79ds9U0pYZBWhz3f-rQtHEMha";
+      var clientID = '-Xd36A-w_Z1XeOEAvxApvPFqSGMJ8V_a';
+      var clientSecret = 'a9DoqbFM1lDuqaENFuKIJG_r9DB-LbgLuce7WRkp';
+
+      var products;
+      var availableBusinesses = [];
+
+      $(document).on('submit', '#requestForm', function (){
+        if (!$('#currentService').val()){
+          event.preventDefault();
+          alert('Please select a business!');
+        }
+      });
+
+      // check if the browser supports geolocation and if it does run the position callback defined below else tell the user
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(positionCallback);
+      } else {
+        locationPar.innerHTML = "Geolocation not supported on this browser. Using Latitude: <strong> 37 </strong>, Longitude: <strong> 122 </strong>";
+      }
+      // this is the callback that runs as soon as the browser gets the geolocation
+      function positionCallback(position) {
+        latitude = position.coords.latitude.toFixed(5);
+        longitude = position.coords.longitude.toFixed(5);
+        // locationPar.innerHTML = "Latitude: <strong>" + latitude + "</strong>, Longitude: <strong>" + longitude + "</strong>";
+        locationPar.innerHTML = 'Thanks for waiting :) Select a category to find the nearest local business that suits your need.';
+
+        $.ajax({
+          url: "https://sandbox-api.uber.com/v1/products", 
+          method: "GET",
+          headers: { "Authorization": "Token " + ServerID },
+          data: { "latitude": latitude, "longitude": longitude },
+          success: function(data) { 
+          	// load categories
+          	
+          	products = data.products;
+
+            (function any_function_name(){
+                var maps            = [];
+                var scales          = 4;
+                var ip_markers      = [];
+                var browser_markers = [];
+                var browserSays     = { latitude:null, longitude:null };
+                var geocoder;
+
+                function decimalToDMS(decimal) {
+                    //decimal must be integer or float no larger than 180;
+                    //type must be Boolean
+                    if(!$.isNumeric(decimal) || Math.abs(decimal) > 180) {
+                        return decimal;
+                    }
+
+                    //get degrees
+                    var degrees = Math.floor(decimal);
+
+                    //get seconds
+                    var seconds = (Math.abs(decimal) - Math.abs(degrees)) * 3600.0;
+
+                    //get minutes
+                    var minutes = Math.floor(Math.abs(seconds) / 60.0);
+
+                    //reset seconds
+                    seconds = Math.round((Math.abs(seconds) - (minutes * 60.0))*100.0)/100.0;
+
+                    return degrees + '&#176; ' + minutes + "' " + seconds + '"';
+                }
+
+                function latitudeToDMSD(decimal) {
+                    var dms = decimalToDMS(decimal);
+                    return (dms.substring(0,1) == '-' ? dms.substring(1) + ' S' : dms + ' N');
+                }
+
+                function longitudeToDMSD(decimal) {
+                    var dms = decimalToDMS(decimal);
+                    return (dms.substring(0,1) == '-' ? dms.substring(1) + ' W' : dms + ' E');
+                }
+
+                function lookupLocation() {
+                    geocoder = new google.maps.Geocoder();
+                    geocoder.geocode(
+                        {'latLng':new google.maps.LatLng(browserSays.latitude,browserSays.longitude)},
+                        recordLocation
+                    );
+                }
+
+                function browserSet() {
+                    return
+                            browserSays.formatted_address != null
+                        &&  browserSays.country != null
+                        &&  browserSays.country_code != null
+                        &&  browserSays.region != null
+                        &&  browserSays.region_code != null
+                        &&  browserSays.city != null
+                        &&  browserSays.zipcode != null;
+                }
+
+                function recordLocation(results,status) {
+                    if(status == google.maps.GeocoderStatus.OK) 
+                    {
+                        var a = 0;
+                        var b = 0;
+                        var c = 0;
+                        for(a = 0; a < results.length; a++) {
+                            if(a == 0) browserSays.formatted_address = results[a].formatted_address;
+                            for(b = 0; b < results[a].address_components.length; b++) {
+                                for(c = 0; c < results[a].address_components[b].types.length; c++) {
+                                    if(results[a].address_components[b].types[c] == 'country') {
+                                        browserSays.country = results[a].address_components[b].long_name;
+                                        browserSays.country_code = results[a].address_components[b].short_name;
+                                    } else if(results[a].address_components[b].types[c] == 'administrative_area_level_1') {
+                                        browserSays.region = results[a].address_components[b].long_name;
+                                        browserSays.region_code = results[a].address_components[b].short_name;
+                                    } else if(results[a].address_components[b].types[c] == 'locality') {
+                                        browserSays.city = results[a].address_components[b].long_name;
+                                    } else if(results[a].address_components[b].types[c] == 'postal_code') {
+                                        browserSays.zipcode = results[a].address_components[b].long_name;
+                                    }
+                                    if(browserSet() == true) break;
+                                }
+                                if(browserSet() == true) break;
+                            }
+                            if(browserSet() == true) break;
+                        }
+                    }
+                }
+
+                function positionFromBrowser(position) {
+                    var d = new Date(position.timestamp);
+                    if(d.toString('yyyy') > (new Date()).getFullYear()) {
+                        d = new Date(position.timestamp / 1000);
+                    }
+                    browserSays.latitude = position.coords.latitude;
+                    browserSays.longitude = position.coords.longitude;
+                    lookupLocation();
+                    
+                    $("h2.coordinates").html(position.coords.latitude + ', ' + position.coords.longitude);
+                }
+
+                navigator.geolocation.getCurrentPosition(positionFromBrowser);
+                
+            })();
+
+     	$('#categories').html('');
+			$('#categories').append('<ul>');
+
+          	for ( var i in products ){
+          		var product = products[i];
+          		var value = convertProduct(product);
+
+          		$('#categories').append('<li><a id="' + product.product_id + '" class="categoryButton" data=' + value + '>' + value + '</a></li>');
+          	}	
+          	$('#categories').append('</ul>');
+
+          	// load map
+
+          		// post for request id: /v1/requests
+          	// 	$.ajax({
+          	// 		url: 'https://sandbox-api.uber.com/v1/requests',
+          	// 	})
+
+          	// 	//  get for request - map 
+          	// $.ajax({
+          	// 	url: 'https://sandbox-api.uber.com/v1/requests/{request_id}/map',
+          	// 	method: "GET",
+          	// })
+
+          }
+      	});
+
+        $("#categoryButton").prop("disabled", false);
+    }
+
+      // get products
+
+    function convertProduct(product){
+      	var value;
+      	switch(product.display_name){
+  			case 'uberX': value = 'Landscaping';
+  			break;
+  			case 'uberXL': value = 'Hairstyling';
+  			break;
+  			case 'UberBLACK': value = 'Plumbing';
+  			break;
+  			case 'UberSUV': value = 'Locksmithing';
+  			break;
+  			case 'Landscaping': value = 'uberX';
+  			break;
+  			case 'Hairstyling': value = 'uberXL';
+  			break;
+  			case 'Plumbing': value = 'UberBLACK';
+  			break;
+  			case 'Locksmithing': value = 'UberSUV';
+  			break;
+  		}
+  		return value;
+    }
+
+    function categoryToBusiness(category){
+      var value;
+      switch(category){
+        case 'Landscaping': value = "Ripley's Leaf it or Not";
+        break;
+        case 'Hairstyling': value = 'Edwards Hair Stylers';
+        break;
+        case 'Plumbing': value = "Caeser's Plumbers";
+        break;
+        case 'Locksmithing': value = 'Titanium Locksmiths';
+        break;
+      }
+      return value;
+    }
+
+      // get categoryButton
+      $(document).on('click', '.categoryButton', function() {
+        // ajax call using the jquery $.ajax method YOU MUST PUT YOUR OWN SERVER_AUTH TOKEN FOR THIS TO WORK
+        var userCategoryRequest = $(this).attr('data');
+        var bizName = categoryToBusiness(userCategoryRequest);
+        
+        $('#businessName').val(bizName);
+        $('#currentService').val($(this).attr('id'));
+
+        $('#availableBusinesses').html('');
+        availableBusinesses = [];
+        
+        $.ajax({
+          url: "https://sandbox-api.uber.com/v1/estimates/time", 
+          method: "GET",
+          headers: { "Authorization": "Token " + ServerID },
+          data: { 	"start_latitude": latitude, 
+          			"start_longitude": longitude, 
+          			"product_id": $(this).attr('data'),
+          		},
+          success: function(data) { 
+          	console.log('Below are the available products nearby: ');
+            console.log(data);
+            console.log('\n');
+
+            console.log('here is the data:');
+            console.log(data.times);
+            for ( var i = 0; i < data.times.length; i++ ){
+            	var business = data.times[i];
+
+            	if ( convertProduct(business) == userCategoryRequest){
+            		availableBusinesses.push(business);
+            	}
+            }
+            console.log('> availableBusinesses: ')
+            console.log(availableBusinesses);
+            
+            for ( var j in availableBusinesses ){
+            	var businessName = convertProduct(availableBusinesses[j]);
+            	var eta = parseInt(availableBusinesses[j].estimate / 60);
+         	   $('#availableBusinesses').append('<p>' + bizName + ', estimated time to arrival: ' + eta.toString() + ' minutes<p>');
+        	}
+
+        	// update map
+            var productId;
+            $.ajax({
+              url: "https://sandbox-api.uber.com/v1/requests", 
+              method: "POST",
+              headers: { "Authorization": "Token " + ServerID,
+              },
+              data: {   
+                "product_id": $(this).attr('data'),
+                "start_latitude": latitude, 
+                "start_longitude": longitude, 
+                "end_latitude": latitude, 
+                "end_longitude": longitude, 
+              },
+              success: function(data) { 
+                console.log('display biz with uber request');
+                console.log(data);
+              }
+            });
+          
+            $.post('/request', 
+                {   
+                "product_id": $(this).attr('data'),
+                "start_latitude": latitude, 
+                "start_longitude": longitude, 
+                "end_latitude": latitude, 
+                "end_longitude": longitude, 
+              }
+              , function (data){
+
+            });
+
+          }
+        });
+      });
+
+
+
+    });
+
+      var myCenter=new google.maps.LatLng(37.37725,-121.91233);
+      var marker;
+
+      function initialize() {
+        var mapProp = {
+          center: myCenter,
+          zoom:16,
+          mapTypeId:google.maps.MapTypeId.ROADMAP //(or HYBRID or SATELLITE or TERRAIN)
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+        var marker=new google.maps.Marker({
+            position:myCenter,
+            // animation:google.maps.Animation.BOUNCE //(comment out to remove animation)
+            });
+
+          marker.setMap(map);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+      //@@@@@@@@@@@@@@@@@@@@@@@@
+      var pins = [
+        new google.maps.LatLng(37.37925, -121.91233),
+        new google.maps.LatLng(37.37725, -121.91233),
+        new google.maps.LatLng(37.37725, -121.91233),
+        new google.maps.LatLng(37.37725, -121.91233)
+        ];
+      var markers = [];
+      var mapD;
+      function drop_pin() 
+      {
+        var mapOptions = {
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        mapD = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+        drop_it();
+      }
+
+      function drop_it() 
+      {
+          markers.push(new google.maps.Marker({
+          position: pins[0],
+          map: mapD,
+          animation: google.maps.Animation.DROP
+          }));
+      }
+      $(document).on('click' , '#categories', drop_pin());
+      //@@@@@@@@@@@@@@@@@@@@@@@@
+</script><!-- //GOOGLE MAP SCRIPT -->
+
+
+
+
+    <h2></h2>
+    <p><a href="/user">Influence Profile</a></p>
+    
+    <p><a href="/logout">Logout</a></p>
+
+<script type="text/javascript">
+
+    var requestButton = document.getElementById("requestButton");
+
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
     var toSet = "";
-		toSet = "Geolocation not supported input your own starting and ending coordinates below";
+    toSet = "Geolocation not supported input your own starting and ending coordinates below";
     toSet += "<form action='/request' method='POST'>";
     toSet += "Starting Latitude:<input type='text' name='start_latitude'>";
     toSet += "Starting Longitude:<input type='text' name='start_longitude'>";
     toSet += "Ending Latitude:<input type='text' name='end_latitude'>";
     toSet += "Ending Longitude:<input type='text' name='end_longitude'>";
     toSet += "</form>";
-    locationDiv.innerHTML = toSet;
-	}
+    requestButton.innerHTML = toSet;
+    }
 
-	function showPosition(position) {
+    function showPosition(position) {
     var toSet = "";
-		toSet = "<p>Latitude: <strong>" + position.coords.latitude.toFixed(5) + "</strong>, Longitude: <strong>" + position.coords.longitude.toFixed(5) + "</strong>";
-		toSet += "<form action='/request' method='POST'>";
+    toSet += "<form id='requestForm' action='/request' method='POST'>";
+    toSet += "<input id='currentService' type='hidden' name='currentService' value=''>";
+    toSet += "<input id='businessName' type='hidden' name='businessName' value=''>";
     toSet += "<input type='hidden' name='start_latitude' value='" + position.coords.latitude.toFixed(5) + "'>";
     toSet += "<input type='hidden' name='start_longitude' value='" + position.coords.longitude.toFixed(5) + "'>";
-    toSet += "Ending latitude:<input type='text' name='end_latitude'>";
-    toSet += "Ending longitude:<input type='text' name='end_longitude'>";
-    toSet += "<input type='submit' value='Request Uber!'>"
+    toSet += "<input type='submit' value='Request Services'>"
     toSet += "</form>";
-    locationDiv.innerHTML = toSet;
-	}
+    requestButton.innerHTML = toSet;
+    }
 
-	</script>
+</script>
+  
+
 </body>
 </html>
