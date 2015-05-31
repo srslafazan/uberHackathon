@@ -1,0 +1,348 @@
+*{
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+#body{
+	background: url("./uber_background6.jpg") 50%;
+	margin-top: -55px;
+	padding-top: 50px;
+}
+.OurName{
+	color: green;
+	font-size: 40px;
+	font-family: normal 'Cookie', cursive !important;
+	/*font-weight: bold;*/
+	/*margin: 10px 0px 0px 278px;*/
+	/*text-align: center;*/
+}
+#logoOurName {
+	margin: 0 auto;
+	width: 460px;
+	padding: 0;
+	margin-top: 12px;
+	position: absolute;
+	top: 0;
+	left: 40%;
+}
+.Name{
+	color: green;
+	font-size: 40px;
+	font-family: normal 'Cookie', cursive !important;
+}
+span{
+	color: #5383d3;
+	font-size: 40px;
+	font-family: uber;
+}
+.wrapper {
+    position:relative;
+    overflow: hidden;
+	padding:5px;
+  	height:150px;
+}
+a{
+	color: #CBC9D0;
+}
+.list {
+	background-image: radial-gradient(oval,white, black);
+    position:absolute;
+    left:0px;
+    top:0px;
+  	min-width:3000px;
+  	margin-left:12px;
+    margin-top:0px;
+}
+.list li{
+	display:table-cell;
+	min-width: 222px ;
+    position:relative;
+    text-align:center;
+    cursor:grab;
+    cursor:-webkit-grab;
+    color:#efefef;
+    background-color: #434343;
+    vertical-align:middle;
+    font-size: 30px;
+    font-family: block;
+    font-weight: bold;
+    border: 3px solid black;
+    border-right: 0px solid black;
+
+    box-shadow: 5px 5px 14px black;
+}
+	.list li:last-child{
+		border-right: 3px solid black;
+	}	
+	.nav>li>a {
+		padding: 27px 15px !important;
+	}
+	.nav>li>a:hover {
+		color: black;
+	}
+#uber_logo{
+	margin: -11px 7px 40px -12px;
+	width: 100px;
+	height: auto;
+	display: inline-block;
+}
+.scroller {
+    text-align:center;
+    cursor:pointer;
+    display:none;
+    padding:7px;
+    padding-top:11px;
+    white-space:no-wrap;
+    vertical-align:middle;
+    background-color:#fff;
+}
+.scroller-right{
+    float:right;
+    height: 63px;
+    background-color: initial;
+    margin: 18px 0 0 0;
+}
+.scroller-left {
+    float:left;
+    height: 63px;
+    background-color: initial;
+    margin: 18px 0 0 0;
+}
+.glyphicon-chevron-left:before {
+	content: "\e079";
+	font-size: 40px;
+	color: #F98E4D;
+	/*border: 2px solid black;*/
+}
+.glyphicon-chevron-right:before {
+	content: "\e079";
+	font-size: 40px;
+	color: #F98E4D;
+	/*border: 2px solid black;*/
+}
+#googleMap{
+	width: 75%;
+	height: 500px;
+	background-color: gray;
+	margin: 10px auto 30px auto;
+	border: solid black 3px;
+	box-shadow: 5px 5px 14px black
+}
+#button{
+	text-align: center;
+	margin: -6rem auto -3rem auto;
+}
+#requestButton{
+	width: 300px;
+	height: 100px;
+	border: 3px solid black;
+	margin: 80px auto;
+	box-shadow: 5px 5px 14px black;
+	border-radius: 12px;
+	background-color: green;
+	color: white;
+	font-weight: bold;
+	font-size: 35px;
+	font-family: normal 'Cookie', cursive !important;
+}
+	#requestButton:hover{
+		background-color: forestgreen;
+	}
+	#requestButton input {
+		padding: 20px 25px;
+	}
+.navbar-default .navbar-brand {
+    color: #777;
+    margin-top: -10px;
+}
+.navbar-inverse {
+    background-color: #222;
+    border-color: #080808;
+    height: 80px;
+}
+.navbar-header {
+	width:300px;
+}
+.nav-tabs {
+	height: 150px;
+	border-bottom: 0 !important;
+	margin: 0 auto !important;
+}
+.nav-tabs li {
+	height: 100px;
+}
+.nav-tabs>li>a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+  color: white;
+  font-family: normal 'Cookie', cursive !important;
+}
+.navbar-inverse .navbar-nav>li>a {
+	color: #9d9d9d;
+	font-size: 20px;
+	margin-top: 4px;
+	margin-right: -15px;
+	/*border-right: 1px solid #9d9d9d;*/
+}
+.footer-distributed{
+	background-color: #292c2f;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	height: 20rem;
+	text-align: left;
+	font: bold 16px sans-serif;
+	padding: 30px 50px;
+	margin-bottom: -80px;
+}
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right{
+	display: inline-block;
+	vertical-align: top;
+}
+/* Footer left */
+.footer-distributed .footer-left{
+	width: 40%;
+}
+/* The company logo */
+.footer-distributed h3{
+	color:  #ffffff;
+	font: normal 36px 'Cookie', cursive !important;
+	margin: 0;
+}
+.footer-distributed h3 span{
+	color:  #5383d3;
+}
+/* Footer links */
+.footer-distributed .footer-links{
+	color:  #ffffff;
+	margin: 20px 0 12px;
+	padding: 0;
+}
+.footer-distributed .footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color:  inherit;
+}
+.footer-distributed .footer-company-name{
+	color:  #8f9296;
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+}
+/* Footer Center */
+.footer-distributed .footer-center{
+	width: 35%;
+}
+.footer-distributed .footer-center i{
+	background-color:  #33383b;
+	color: #ffffff;
+	font-size: 25px;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 42px;
+	margin: 10px 15px;
+	vertical-align: middle;
+}
+.footer-distributed .footer-center i.fa-envelope{
+	font-size: 17px;
+	line-height: 38px;
+}
+.footer-distributed .footer-center p{
+	display: inline-block;
+	color: #ffffff;
+	vertical-align: middle;
+	margin:0;
+}
+.footer-distributed .footer-center p span{
+	display:block;
+	font-weight: normal;
+	font-size:14px;
+	line-height:2;
+}
+.footer-distributed .footer-center p a{
+	color:  #5383d3;
+	text-decoration: none;;
+}
+/* Footer Right */
+.footer-distributed .footer-right{
+	width: 20%;
+}
+.footer-distributed .footer-company-about{
+	line-height: 20px;
+	color:  #92999f;
+	font-size: 13px;
+	font-weight: normal;
+	margin: 0;
+}
+.footer-distributed .footer-company-about span{
+	display: block;
+	color:  #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+.footer-distributed .footer-icons{
+	margin-top: 25px;
+}
+.footer-distributed .footer-icons a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	background-color:  #33383b;
+	border-radius: 2px;
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+	margin-right: 3px;
+	margin-bottom: 5px;
+}
+/* If you don't want the footer to be responsive, remove these media queries */
+@media (max-width: 880px) {
+	.footer-distributed{
+		font: bold 14px sans-serif;
+	}
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-center,
+	.footer-distributed .footer-right{
+		display: block;
+		width: 100%;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+	.footer-distributed .footer-center i{
+		margin-left: 0;
+	}
+}
+input {
+	background-color: transparent;
+}
+#myTab {
+	width: 400px;
+	margin: 0 auto !important;
+}
+
+#availableBusinesses {
+	text-align: center;
+	color: black;
+	font-size: 1.2em;
+	border: 3px solid black;
+	padding: 2rem;
+	padding-top:3rem;
+	width: 65%;
+	margin: 10px auto 25px auto;
+	background-color: #F98E4D;
+	box-shadow:5px 5px 14px black
+}
+.navbar-brand p {
+	font-size:.8em;
+	display:inline;
+}	
