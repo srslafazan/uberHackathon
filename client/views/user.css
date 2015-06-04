@@ -4,9 +4,6 @@
 	padding: 0;
 	font-family: 'Architects Daughter','Indie Flower', Handlee, Oxygen, sans-serif;
 }
-
-
-
 #body{
 	background: url("./uber_background6.jpg") 50%;
 	margin-top: -55px;
@@ -48,14 +45,7 @@ span{
   	margin-left:8%;
 }
 a{
-	color: #00615E;
-	/*font-size: 1.5em;*/
-	font-family: 'Electrolize';
-	font-weight: bold;
-}
-a:hover {
-	color: #575680;
-	text-decoration: none;
+	color: #CBC9D0;
 }
 .list {
 	background-image: radial-gradient(oval,white, black);
@@ -128,13 +118,16 @@ a:hover {
 	content: "\e079";
 	font-size: 40px;
 	color: #F98E4D;
+	/*border: 2px solid black;*/
 }
 .glyphicon-chevron-right:before {
 	content: "\e079";
 	font-size: 40px;
 	color: #F98E4D;
+	/*border: 2px solid black;*/
 }
 #googleMap{
+	/*width: 85%;*/
 	height: 500px;
 	background-color: gray;
 	margin: 10px auto 30px auto;
@@ -158,6 +151,7 @@ a:hover {
 	color: white;
 	font-weight: bold !important;
 	font-size: 3rem;
+	/*font-family: 'Indie Flower' !important;*/
 
 }
 	#requestButton:hover{
@@ -192,6 +186,7 @@ a:hover {
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
   color: white;
+  /*font-family: normal 'Cookie', cursive !important;*/
 }
 .navbar-inverse .navbar-nav>li>a {
 	color: #9d9d9d;
@@ -205,7 +200,7 @@ a:hover {
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	width: 100%;
-	height: 23rem;
+	height: 20rem;
 	text-align: left;
 	font: bold 16px sans-serif;
 	padding: 30px 50px;
@@ -217,11 +212,14 @@ a:hover {
 	display: inline-block;
 	vertical-align: top;
 }
+/* Footer left */
 .footer-distributed .footer-left{
 	width: 40%;
 }
+/* The company logo */
 .footer-distributed h3{
 	color:  #ffffff;
+	/*font: normal 36px 'Cookie', cursive !important;*/
 	margin: 0;
 }
 .footer-distributed h3 span{
@@ -350,6 +348,7 @@ input {
 	font-size: 1.3em;
 	font-weight: bold;
 	border: 3px solid black;
+	/*font-family: 'Indie Flowers' !important;*/
 	padding: 2rem 0 1.25rem 0;
 	width: 60%;
 	margin: 10px auto -13px auto;
@@ -365,9 +364,10 @@ input {
 .businessName, .eta {
 	color: #5383D3;
 	font-size: 1.2em; 
+	/*font-style:italic;*/
 	font-family: 'Architects Daughter';
 }
-.mainLink, {
+.mainLink {
 	margin: 0 auto;
 	margin-top: -2px;
 }
@@ -379,62 +379,3 @@ input {
 		color: #F3212C;
 		text-decoration: none;
 	}
-
-/* JAE CSS SUCCESS PAGE */
-#location{
-	font-family: 'Oxygen', sans-serif;
-	font-size: 14px;
-	vertical-align: center;
-}
-
-.powered
-{
-	font-family: 'Electrolize';
-}
-
-.else
-{
-	text-align: center;
-	font-size: 1.2em;
-	border: 3px solid black;
-	padding: 1rem 3rem;
-	width: 50%;
-	margin: 10px auto 25px auto;
-	background-color: #F98E4D;
-	box-shadow:5px 5px 14px black;
-}
-
-.else li{
-	list-style: none;
-}
-
-.else li:hover{
-	color: lightgray;
-}
-
-#intro
-{
-	font-family: "Architects Daughter", cursive;
-}
-#loginText {
-	margin: 5% auto 0 auto;
-	width: 30%;
-	height: 25%;
-	padding: 5rem;
-
-}
-#loginText h2 a {
-	color: #00615E;
-	font-size: 1.5em;
-	font-family: 'Electrolize';
-	font-weight: bold;
-}
-#loginText h2 a:hover {
-		color: #575680;
-		text-decoration: none;
-	}
-
-.apiResources {
-	color: #C7BE31;
-	font-size: 1.1em;
-}

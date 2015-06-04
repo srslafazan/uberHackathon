@@ -14,22 +14,6 @@ var config = require('./config.js');
 var mongoose  = require('mongoose'),
   Schema    = mongoose.Schema;
 
-// SCHEMA
-  var businessSchema = new mongoose.Schema({
-    // PROPERTIES
-      name: { type: String },
-      productCategory: { type: String },
-      smbLicense: { type: String },
-    // IMPORTED DOCUMENTS
-
-    //EXPORTED DOCUMENTS
-  });
-
-  mongoose.model('Business', businessSchema);
-  var Business = mongoose.model('Business');
-
-  
-
 // ClientID & ClientSecret for API requests with OAUTH
 var clientID = config.ClientID;
 var clientSecret = config.ClientSecret;
@@ -262,11 +246,23 @@ app.post('/request', ensureAuthenticated, function (request, response) {
 		product_id: request.body.currentService,
 	};
 
-	postAuthorizedRequest('/v1/requests', request.user.accessToken, parameters, function (error, res) {
-		if (error) { console.log(error); }
-    console.log(res);
-    response.render('success', { 'businessName':businessName, 'eta':res.eta });
+  postAuthorizedRequest('/v1/requests', request.user.accessToken, parameters, function (error, res) {
+
+    var request_id = res.request_id;
+    console.log(request_id);
+
+    getAuthorizedRequest('/v1/requests/' + request_id + '/map', request.user.accessToken, function (req, res) {
+      console.log('========================================');
+      console.log(res);
+      console.log('========================================');
+    });
+
+
+
+    response.render('success', { 'businessName':businessName, 'eta':res.eta, 'mapInfo':'mapInfoPlaceholder' });
 	});
+
+
 });
 
 // logout

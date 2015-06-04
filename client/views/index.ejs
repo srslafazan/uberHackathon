@@ -4,16 +4,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="./views/UberBootstrap.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Supermercado+One|Electrolize|Roboto+Mono:400,500' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato|Oxygen' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="./views/UberBootstrap.css">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>NeighUBERly</title>
     <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
   <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
-<!-- Latest compiled and minified CSS -->
 
 <!-- Latest compiled and minified JavaScript -->
 
@@ -25,7 +31,6 @@
     <![endif]-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDNO6mBsSn03jTgWSwHulQT6X1YO0UMSeY&amp&sensor=false&callback=initializeMap&libraries=places"></script>
     <script src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/main.js"></script>
     <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/common.js"></script>
@@ -37,7 +42,6 @@
     <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/controls.js"></script>
     <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/maps-api-v3/api/js/20/11a/stats.js"></script>
 </head>
-
 <body>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -54,8 +58,6 @@
         <p>Powered by UBER</p>
       </a>
 
-      
-
     </div>
 
     <div id='logoOurName'>
@@ -70,11 +72,9 @@
       <ul class="nav navbar-nav navbar-right">
         <!-- <li><a href="#">Customer</a></li> -->
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="/user">Influence Profile</a></li>
-            <li><a href="/register">Business Registration</a></li>
-            <!-- <li><a href="#">Local Businesses</a></li> -->
             <li class="divider"></li>
             <li><a href="/logout">Logout</a></li>
           </ul>
@@ -89,7 +89,7 @@
     <p id="location">Hang Tight! Getting Current Location...<p>
   </div>
 
-  <div id="googleMap" style="width:500px;height:380px;"></div>
+  <div id="googleMap" style="width:60%;height:26em;"></div>
 
 <div class="container">
   <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
@@ -127,29 +127,29 @@
   </div>
   <div class="footer-center">
     <div>
-      <i class="fa fa-map-marker"></i>
-      <p><span>2027 Uber Street</span> San Jose, CA</p>
-    </div>
-    <div>
-      <i class="fa fa-phone"></i>
-      <p>+1(408) 867-5309</p>
-    </div>
-    <div>
       <i class="fa fa-envelope"></i>
-      <p><a href="mailto:HireUs@Uber.com">HireUs@Uber.com</a></p>
+      <p><a href="mailto:srslafazan@gmail.com">HireUs@Uber.com</a></p>
+    </div>
+    <div>
+   
+    <ul><p class='apiResources'>Uber API ResourcesImplemented:</p>
+      <li class='apiResources'>GET /v1/products</li>
+      <li class='apiResources'>GET /v1/estimates/time</li>
+      <li class='apiResources'>GET /v1.2/history</li>
+      <li class='apiResources'>GET /v1/me</li>
+      <li class='apiResources'>POST /v1/requests</li>
+    </ul>
     </div>
   </div>
   <div class="footer-right">
     <p class="footer-company-about">
-      <span>About the company</span>
-      Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+      <span>Meet the Creators</span>
+      <p class='mainLink'><a href="http://www.linkedin.com/in/charles139">> Charles</a></p>
+      <p class='mainLink'><a href="http://www.linkedin.com/in/pub/jae-hong/73/a43/b93">> Jae</a></p>
+      <p class='mainLink'><a href="http://www.linkedin.com/in/johnech">> John</a></p>
+      <p class='mainLink'><a href="http://www.linkedin.com/in/nizarkassis">> Nizar</a></p>
+      <p class='mainLink'><a href="http://www.linkedin.com/in/shainlafazan">> Shain</a></p>
     </p>
-<!--     <div class="footer-icons">
-      <a href="#"><i class="fa fa-facebook"></i></a>
-      <a href="#"><i class="fa fa-twitter"></i></a>
-      <a href="#"><i class="fa fa-linkedin"></i></a>
-      <a href="#"><i class="fa fa-github"></i></a>
-    </div> -->
   </div>
 </footer>
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -493,7 +493,7 @@ $('.scroller-left').click(function() {
             for ( var j in availableBusinesses ){
             	var businessName = convertProduct(availableBusinesses[j]);
             	var eta = parseInt(availableBusinesses[j].estimate / 60);
-         	   $('#availableBusinesses').html('<p>Closest matching business:\n' + bizName + ', estimated time to arrival: ' + eta.toString() + ' minutes.<p>');
+         	   $('#availableBusinesses').html('<p>Closest matching business:\n <span class="businessName">' + bizName + '</span>, estimated time to arrival: <span class="eta">' + eta.toString() + ' min</span>.<p>');
         	}
 
         	// update map
@@ -536,53 +536,145 @@ $('.scroller-left').click(function() {
 
     });
 
-      var myCenter=new google.maps.LatLng(37.37725,-121.91233);
-      var marker;
-
-      function initialize() {
-        var mapProp = {
-          center: myCenter,
-          zoom:16,
-          mapTypeId:google.maps.MapTypeId.ROADMAP //(or HYBRID or SATELLITE or TERRAIN)
-        };
-        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-        var marker=new google.maps.Marker({
-            position:myCenter,
-            // animation:google.maps.Animation.BOUNCE //(comment out to remove animation)
-            });
-
-          marker.setMap(map);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
       //@@@@@@@@@@@@@@@@@@@@@@@@
-      var pins = [
-        new google.maps.LatLng(37.37925, -121.91233),
-        new google.maps.LatLng(37.37725, -121.91233),
-        new google.maps.LatLng(37.37725, -121.91233),
-        new google.maps.LatLng(37.37725, -121.91233)
-        ];
+      // If you're adding a number of markers, you may want to drop them on the map
+// consecutively rather than all at once. This example shows how to use
+// window.setTimeout() to space your markers' animation.
+
+      var SanJose = new google.maps.LatLng(37.37725,-121.91233);;
+
+      var neighborhoods = [
+        new google.maps.LatLng(37.37800,-121.91133),
+        new google.maps.LatLng(37.37825,-121.91333),
+        new google.maps.LatLng(37.37625,-121.91533),
+        new google.maps.LatLng(37.37825,-121.91033)
+      ];
+      var icons = [
+      './views/lawnmower.png',
+      './views/hairdryer.png',
+      './views/plunger.png',
+      './views/lock.png',
+      ];
+
       var markers = [];
-      var mapD;
-      function drop_pin() 
+      var map;
+
+      function initialize() 
       {
         var mapOptions = {
-        zoom: 16,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+          zoom: 17,
+          center: SanJose,
+          mapTypeId: google.maps.MapTypeId.ROADMAP //or SATELLITE or HYBRID or TERRAIN or ROADMAP
         };
-        mapD = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
-        drop_it();
+
+        map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+        marker = new google.maps.Marker({
+          map:map,
+          icon: './views/pindrop.png',
+          draggable:true,
+          animation: google.maps.Animation.DROP,
+          position: SanJose
+        });
       }
 
-      function drop_it() 
-      {
-          markers.push(new google.maps.Marker({
-          position: pins[0],
-          map: mapD,
-          animation: google.maps.Animation.DROP
-          }));
+      function dropLawnMower() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeout(neighborhoods[i], i * 300);
+        }
       }
-      $(document).on('click' , '#myTab', drop_pin());
+      function dropHairDryer() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeoutH(neighborhoods[i], i * 300);
+        }
+      }
+
+      function dropPlunger() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeoutP(neighborhoods[i], i * 300);
+        }
+      }
+
+      function dropLock() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeoutL(neighborhoods[i], i * 300);
+        }
+      }
+
+      function addMarkerWithTimeout(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            icon: icons[0],
+            map: map,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+          }));
+        }, timeout);
+      }
+
+      function addMarkerWithTimeoutH(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            icon: icons[1],
+            map: map,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+          }));
+        }, timeout);
+      }
+
+      function addMarkerWithTimeoutP(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            icon: icons[2],
+            map: map,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+          }));
+        }, timeout);
+      }
+
+      function addMarkerWithTimeoutL(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            icon: icons[3],
+            map: map,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+          }));
+        }, timeout);
+      }
+
+      function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+      }
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+      
+      $('document').ready(function(){
+          $(document).on('click' , '#a1111c8c-c720-46c3-8534-2fcdd730040d', dropLawnMower);
+      });
+      $('document').ready(function(){
+          $(document).on('click' , '#821415d8-3bd5-4e27-9604-194e4359a449', dropHairDryer);
+      });
+      $('document').ready(function(){
+          $(document).on('click' , '#23a231fd-9fa8-45a7-b212-e3f9cb69873f', dropPlunger);
+      });
+      $('document').ready(function(){
+          $(document).on('click' , '#c9b74e41-816c-4df8-8290-41fc1df9476c', dropLock);
+      });
+
       //@@@@@@@@@@@@@@@@@@@@@@@@
 </script><!-- //GOOGLE MAP SCRIPT -->
 

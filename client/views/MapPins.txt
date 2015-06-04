@@ -1,0 +1,140 @@
+//@@@@@@@@@@@@@@@@@@@@@@@@
+      // If you're adding a number of markers, you may want to drop them on the map
+// consecutively rather than all at once. This example shows how to use
+// window.setTimeout() to space your markers' animation.
+
+      var SanJose = new google.maps.LatLng(37.37725,-121.91233);;
+
+      var neighborhoods = [
+        new google.maps.LatLng(37.37800,-121.91133),
+        new google.maps.LatLng(37.37825,-121.91333),
+        new google.maps.LatLng(37.37625,-121.91533),
+        new google.maps.LatLng(37.37825,-121.91033)
+      ];
+      var icons = [
+      './lawnmower.png',
+      './hairdryer.png',
+      './plunger.png',
+      './lock.png',
+      ];
+
+      var markers = [];
+      var map;
+
+      function initialize() 
+      {
+        var mapOptions = {
+          zoom: 17,
+          center: SanJose,
+          mapTypeId: google.maps.MapTypeId.ROADMAP //or SATELLITE or HYBRID or TERRAIN or ROADMAP
+        };
+
+        map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+        marker = new google.maps.Marker({
+          map:map,
+          icon: './pindrop.png',
+          draggable:true,
+          animation: google.maps.Animation.DROP,
+          position: SanJose
+        });
+      }
+
+      function dropLawnMower() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeout(neighborhoods[i], i * 300);
+        }
+      }
+      function dropHairDryer() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeoutH(neighborhoods[i], i * 300);
+        }
+      }
+
+      function dropPlunger() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeoutP(neighborhoods[i], i * 300);
+        }
+      }
+
+      function dropLock() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeoutL(neighborhoods[i], i * 300);
+        }
+      }
+
+      function addMarkerWithTimeout(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            icon: icons[0],
+            map: map,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+          }));
+        }, timeout);
+      }
+
+      function addMarkerWithTimeoutH(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            icon: icons[1],
+            map: map,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+          }));
+        }, timeout);
+      }
+
+      function addMarkerWithTimeoutP(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            icon: icons[2],
+            map: map,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+          }));
+        }, timeout);
+      }
+
+      function addMarkerWithTimeoutL(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            icon: icons[3],
+            map: map,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+          }));
+        }, timeout);
+      }
+
+      function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+      }
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+      
+      $('document').ready(function(){
+          $(document).on('click' , '#a1111c8c-c720-46c3-8534-2fcdd730040d', dropLawnMower);
+      });
+      $('document').ready(function(){
+          $(document).on('click' , '#821415d8-3bd5-4e27-9604-194e4359a449', dropHairDryer);
+      });
+      $('document').ready(function(){
+          $(document).on('click' , '#23a231fd-9fa8-45a7-b212-e3f9cb69873f', dropPlunger);
+      });
+      $('document').ready(function(){
+          $(document).on('click' , '#c9b74e41-816c-4df8-8290-41fc1df9476c', dropLock);
+      });
+
+      //@@@@@@@@@@@@@@@@@@@@@@@@

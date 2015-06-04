@@ -1,14 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-	<meta charset="UTF-8">
-	<title>Uber API Starter Kit</title>
-</head>
-<body>
+	<title>User</title>
+	<meta charset='UTF-8'>
+	<link rel="stylesheet" type="text/css" href="./views/UberBootstrap.css">
+    
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Supermercado+One|Electrolize|Roboto+Mono:400,500' rel='stylesheet' type='text/css'>
 
-	<h2>App Login</h2>
-	<p>Click to login to Uber and access App</p>
-	<p><a href="/auth/uber">Login</a></p>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cedarville+Cursive' rel='stylesheet' type='text/css'>
+</head>
+<body id="body">
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://www.uber.com">
+        <img id="uber_logo"src="./views/Uber_logo.jpg">
+        <p class="powered">Powered by UBER</p>
+      </a>
+
+      
+
+    </div>
+
+    <div id='logoOurName'>
+        <span class="OurName">Neigh</span>
+        <span>UBER</span>
+        <span class='OurName'>ly</span>
+        <span>.com</span>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li><a href="#">Customer</a></li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Options <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/user">Influence Profile</a></li>
+            <li class="divider"></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	
+		<div id='loginText' class= 'else'>
+
+			<p id='tagline'>Driving business locally.</p>
+
+			<h2><a href="/auth/uber">Login with Uber</a></h2>
+		<div>
 	
 </body>
 </html>
